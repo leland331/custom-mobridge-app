@@ -1,0 +1,221 @@
+{
+ "_comment": "Expected on-wire frames with the proof SOURCE for each (see parity.Status / PARITY.md). Single-source 'firmware'/'app' do NOT clear sending. A command clears to transmit at 'cross' (firmware+app agree), 'stored' (reproduces his real NVM/.rax values), 'passive' (matches a passive connect/read-back sniff) or 'active' (app performing it). The 4 original DSP-write-table entries are single-source firmware (NOT cleared to send). The cap_* passive entries are connect/read/baud. The cap_write_0700_* entries are ACTIVE captures of the official app performing the write; they clear ONLY as byte-exact frames (the exact gain/flag toggles captured), never as a command-level unlock -- arbitrary 0x0700 writes remain gated.",
+ "frames": [
+  {
+   "name": "can_send_3bytes",
+   "cmd": 1552,
+   "data": "010203",
+   "expected": "aa00030610010203e1",
+   "source": "firmware",
+   "note": "CanFrameSend example; LEN=3, cmd BE, checksum per FRAMING.md"
+  },
+  {
+   "name": "auth_empty",
+   "cmd": 2,
+   "data": "",
+   "expected": "aa00000002fe",
+   "source": "firmware",
+   "note": "Authenticate, empty payload"
+  },
+  {
+   "name": "factory_reset_empty",
+   "cmd": 16,
+   "data": "",
+   "expected": "aa00000010f0",
+   "source": "firmware",
+   "note": "mdimod_general_reset"
+  },
+  {
+   "name": "dsp_param_read",
+   "cmd": 1816,
+   "data": "0005",
+   "expected": "aa000207180005da",
+   "source": "firmware",
+   "note": "mdimod_dsp_param_tx, selector/param bytes illustrative"
+  },
+  {
+   "name": "cap_keepalive_0000",
+   "cmd": 0,
+   "data": "",
+   "expected": "aa0000000000",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_ping_swversion_0001",
+   "cmd": 1,
+   "data": "",
+   "expected": "aa00000001ff",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_set_baud_230400_0002",
+   "cmd": 2,
+   "data": "00038400",
+   "expected": "aa000400020003840073",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_session_open_0020",
+   "cmd": 32,
+   "data": "",
+   "expected": "aa00000020e0",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_handshake_0025_0025",
+   "cmd": 37,
+   "data": "",
+   "expected": "aa00000025db",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_config_getfile_0282",
+   "cmd": 642,
+   "data": "",
+   "expected": "aa000002827c",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_stream_toggle_0400",
+   "cmd": 1024,
+   "data": "01",
+   "expected": "aa0001040001fa",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_dsp_read_070f_070f",
+   "cmd": 1807,
+   "data": "0200",
+   "expected": "aa0002070f0200e6",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), DSP value read seen 8x in the connect read-back sweep (selectors 02xx/03xx). Non-persisting read."
+  },
+  {
+   "name": "cap_dsp_read_0718_0718",
+   "cmd": 1816,
+   "data": "000c",
+   "expected": "aa00020718000cd3",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), DSP param read in the connect read-back sweep. Non-persisting read."
+  },
+  {
+   "name": "cap_dsp_read_0710_0710",
+   "cmd": 1808,
+   "data": "0000",
+   "expected": "aa000207100000e7",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_dsp_read_0711_0711",
+   "cmd": 1809,
+   "data": "00",
+   "expected": "aa0001071100e7",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_dsp_read_0713_0713",
+   "cmd": 1811,
+   "data": "",
+   "expected": "aa00000713e6",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_dsp_read_0714_0714",
+   "cmd": 1812,
+   "data": "01",
+   "expected": "aa0001071401e3",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_dsp_read_0716_0716",
+   "cmd": 1814,
+   "data": "02",
+   "expected": "aa0001071602e0",
+   "source": "passive",
+   "note": "USBPcap passive capture of the official app (2026-10-21), 40/40 OUT frames valid. READ/handshake/baud only - NO DSP write captured."
+  },
+  {
+   "name": "cap_write_0700_gain_m0p1",
+   "cmd": 1792,
+   "data": "0000eccd",
+   "expected": "aa000407000000eccd3c",
+   "source": "active",
+   "note": "0x0700 channel-property WRITE, LEN4 [preset=00, channel=00, gain_be16=0xeccd]. ACTIVE capture of the official app performing it (USBPcap 2026-10-21). gain 0xeccd -> raw -4915 -> -0.100 dB (display=raw/512+9.5). Part of the user live toggle gain 0.0->-0.1->0.0. Byte-exact vs MdiFramer."
+  },
+  {
+   "name": "cap_write_0700_gain_0p0_len4",
+   "cmd": 1792,
+   "data": "0000ed00",
+   "expected": "aa000407000000ed0008",
+   "source": "active",
+   "note": "0x0700 WRITE, LEN4 [preset=00, channel=00, gain_be16=0xed00]. ACTIVE capture (USBPcap 2026-10-21). gain 0xed00 = unity raw -4864 -> 0.000 dB. Restore step of the live toggle. Byte-exact vs MdiFramer."
+  },
+  {
+   "name": "cap_write_0700_ch11_flag_on",
+   "cmd": 1792,
+   "data": "000bed0000000000010000007fffffff",
+   "expected": "aa00100700000bed0000000000010000007fffffff74",
+   "source": "active",
+   "note": "0x0700 WRITE, LEN16 full channel-property record [preset=00, channel=0x0b(11), gain_be16=0xed00=0.0dB, ...flag[8]=01 ON, ...limit_be32=0x7fffffff max]. ACTIVE capture (USBPcap 2026-10-21), flag set-and-undo pair. Byte-exact vs MdiFramer."
+  },
+  {
+   "name": "cap_write_0700_ch11_flag_off",
+   "cmd": 1792,
+   "data": "000bed0000000000000000007fffffff",
+   "expected": "aa00100700000bed0000000000000000007fffffff75",
+   "source": "active",
+   "note": "0x0700 WRITE, LEN16 full channel-property record [preset=00, channel=0x0b(11), gain_be16=0xed00=0.0dB, ...flag[8]=00 OFF, ...limit_be32=0x7fffffff]. ACTIVE capture (USBPcap 2026-10-21), the undo of the flag set. Byte-exact vs MdiFramer."
+  },
+  {
+   "name": "cap_write_0700_ch1_gain_m6",
+   "cmd": 1792,
+   "data": "0001e10000000000000000007fffffff",
+   "expected": "aa001007000001e10000000000000000007fffffff8b",
+   "source": "active",
+   "note": "0x0700 LEN16 full record, Ch1 gain -6.0 dB. ACTIVE capture 2026-10-22 vehicle session. gain be16 @[2-3]=0xe100 -> (0xe100-0xed00)/512=-6.0. Reproduced byte-exact by channel_record.build_record(1, gain_db=-6.0). Pins gain field offset+endianness."
+  },
+  {
+   "name": "cap_write_0700_ch1_delay_5ms",
+   "cmd": 1792,
+   "data": "0001ed0000138800000000007fffffff",
+   "expected": "aa001007000001ed0000138800000000007fffffffe4",
+   "source": "active",
+   "note": "0x0700 LEN16 full record, Ch1 delay 5.00 ms. ACTIVE capture 2026-10-22. delay be16 @[5-6]=0x1388=5000 us (CONFIRMS delay is bytes 5-6, NOT 6-7). Reproduced byte-exact by channel_record.build_record(1, delay_ms=5.0)."
+  },
+  {
+   "name": "cap_write_0700_ch1_limiter_m20",
+   "cmd": 1792,
+   "data": "0001ed0000000000000000000cccccd0",
+   "expected": "aa001007000001ed0000000000000000000cccccd087",
+   "source": "active",
+   "note": "0x0700 LEN16 full record, Ch1 limiter -20.0 dBFS. ACTIVE capture 2026-10-22. limiter i32 @[12-15]=0x0cccccd0 = round(float32(10^(-20/20))*2^31). Reproduced byte-exact by channel_record.build_record(1, limiter_dbfs=-20.0). Pins the float32 amplitude pipeline."
+  },
+  {
+   "name": "cap_write_0704_filter_cheby_150_2000",
+   "cmd": 1796,
+   "data": "030001030407d000960c0c",
+   "expected": "aa000b0704030001030407d000960c0c5a",
+   "source": "active",
+   "note": "0x0704 filter-def, Ch1 Chebyshev band 150/2000 Hz 12/12 dB/oct. ACTIVE capture 2026-10-22. payload [sub=03][chan be16=0001][type=03 band][design=04 cheby][f1 be16=0x0096=150][f2 be16=0x07d0=2000][slope1=0x0c=12][slope2=0x0c=12]. NOTE f1/f2 order on wire is f2 then f1: bytes 07d0(2000) then 0096(150). Companion 0x0708 biquad floats NOT yet captured here (on laptop decode) -> coeff math still unproven."
+  },
+  {
+   "name": "cap_write_0704_master_points_empty",
+   "cmd": 1796,
+   "data": "0600",
+   "expected": "aa000207040600ed",
+   "source": "active",
+   "note": "0x0704 sub06 MASTERPOINTS, preset 0, zero points (the empty master EQ list). ACTIVE capture of the official app 2026-10-21: sent after every master-gain write (19:33:12.915 gain, 12.931 0x0702 table, 12.995 this frame). Also in reference_frames_full.json at offsets 3211 and 4261, where it was tagged is_write=False by mistake."
+  }
+ ]
+}

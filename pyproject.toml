@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mobridge"
+version = "0.1.0"
+description = "Open client for Mobridge DA-G2 A2B devices (MDI over FTDI serial)"
+requires-python = ">=3.10"
+license = {text = "GPL-3.0-or-later"}
+dependencies = ["pyserial>=3.5", "PyYAML>=6", "lupa>=2.8", "zeroconf>=0.130"]
+
+[project.optional-dependencies]
+ftdi = ["pyftdi>=0.55"]
+gui = ["PySide6>=6.6"]
+test = ["pytest", "PySide6>=6.6"]
+
+[project.scripts]
+mobridge = "mobridge.cli:main"
+mobridge-gui = "mobridge.gui.ui:main"
+
+[tool.setuptools]
+packages = ["mobridge", "mobridge.gui", "mobridge.gui.screens", "mobridge.gui.official"]
+
+[tool.setuptools.package-data]
+mobridge = ["*.json", "gui/assets/*", "gui/official/assets/*", "gui/official/fonts/*"]

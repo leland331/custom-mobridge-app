@@ -1,0 +1,8 @@
+PySide6>=6.6
+pyserial>=3.5
+PyYAML>=6
+lupa>=2.8
+zeroconf>=0.130
+pytest
+pyinstaller>=6.6
+pillow

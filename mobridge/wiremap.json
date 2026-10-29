@@ -1,0 +1,28 @@
+{
+  "_comment": "MDI command codes from the 2.11.8 firmware dispatch table (see FRAMING.md). cmd = fblock<<8 | fkt. resp_cmd null means the device answers with the same cmd. Codes are firmware-confirmed; the app-job name each one serves is marked confidence low where the mapping is still inferred. DECOMPILE-DERIVED: verify against a capture before trusting writes.",
+  "framer": "mdi",
+  "jobs": {
+    "Authenticate":   {"cmd": 2,    "resp_cmd": null, "confidence": "high", "fw": "mdimod_general_auth"},
+    "FactoryReset":   {"cmd": 16,   "resp_cmd": null, "confidence": "high", "fw": "mdimod_general_reset"},
+    "LocalIDWrite":   {"cmd": 33,   "resp_cmd": null, "confidence": "high", "fw": "mdimod_general_write_serial"},
+    "LocalIDRead":    {"cmd": 3,    "resp_cmd": null, "confidence": "low",  "fw": "general"},
+    "SWVersion":      {"cmd": 1,    "resp_cmd": null, "confidence": "low",  "fw": "general"},
+    "SerialNumber":   {"cmd": 3,    "resp_cmd": null, "confidence": "low",  "fw": "general"},
+    "DipConfig":      {"cmd": 18,   "resp_cmd": null, "confidence": "low",  "fw": "general/gpio"},
+    "ConfigDownload": {"cmd": 513,  "resp_cmd": null, "confidence": "med",  "fw": "config /temp.ini"},
+    "ConfigUpload":   {"cmd": 642,  "resp_cmd": null, "confidence": "med",  "fw": "mdimod_config_receive_file"},
+    "ConfigSync":     {"cmd": 515,  "resp_cmd": null, "confidence": "low",  "fw": "config"},
+    "GetConfigFile":  {"cmd": 641,  "resp_cmd": null, "confidence": "low",  "fw": "config temp.ini"},
+    "FlashRead":      {"cmd": 1024, "resp_cmd": null, "confidence": "low",  "fw": "flashfile group"},
+    "FlashCrc":       {"cmd": 1025, "resp_cmd": null, "confidence": "low",  "fw": "flashfile group"},
+    "CanFrameSend":   {"cmd": 1552, "resp_cmd": null, "confidence": "high", "fw": "mdimod_can_send"},
+    "CanOpen":        {"cmd": 1554, "resp_cmd": null, "confidence": "high", "fw": "mdimod_can_open"},
+    "CanBitrate":     {"cmd": 1556, "resp_cmd": null, "confidence": "med",  "fw": "can"},
+    "DspWrite":       {"cmd": 1792, "resp_cmd": null, "confidence": "med",  "fw": "mdimod_dsp_rx_speakerprops"},
+    "DspRead":        {"cmd": 1808, "resp_cmd": null, "confidence": "med",  "fw": "mdimod_dsp_tx_speakerprops"},
+    "DspParamWrite":  {"cmd": 1815, "resp_cmd": null, "confidence": "med",  "fw": "mdimod_dsp_param_rx"},
+    "DspParamRead":   {"cmd": 1816, "resp_cmd": null, "confidence": "med",  "fw": "mdimod_dsp_param_tx"},
+    "DspTest":        {"cmd": 1817, "resp_cmd": null, "confidence": "med",  "fw": "mdimod_dsp_test"}
+  },
+  "_unmapped_jobs": "Ping SwitchMDI EnableDebug SetBaud ConfigUpload(stream) FlashFile DirChange DirList DirRm DirFlash DebugEnable DebugSend MostOpen MostMsgSend MostQuery MostMode UdsMsgSend A2bOpen A2bMsgSend A2bQuery A2bI2C A2bDescriptor A2bPhantom -- handlers not in this dispatch table (handled pre-session or in another table); confirm live."
+}
